@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Interactive Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(90deg, #ffcc00, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            color: #ffcc00;
+            margin: 20px 0 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ffcc00;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #ffcc00;
+        }
+        
+        .interactive-demo {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        button {
+            background: #ffcc00;
+            color: #2c5364;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #ffd633;
+            transform: scale(1.05);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .output {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            min-height: 50px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .demo-element {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            border-radius: 8px;
+            transition: all 0.5s ease;
+            background: #ffcc00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c5364;
+            font-weight: bold;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Flexbox example styles */
+        .flex-container {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .flex-item {
+            background: #ffcc00;
+            color: #2c5364;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            flex: 1;
+        }
+        
+        /* Animation example styles */
+        @keyframes exampleAnimation {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .animated-element {
+            animation: exampleAnimation 2s infinite;
+        }
+        
+        /* Grid example styles */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .grid-item {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS Interactive Examples</h1>
+            <p>Learn CSS through practical examples and interactive demos</p>
+        </header>
+        
+        <div class="card-container">
+            <div class="card">
+                <h2>CSS Selectors</h2>
+                <p>CSS selectors are patterns used to select the element(s) you want to style.</p>
+                
+                <div class="code-example">
+                    /* Element selector */<br>
+                    p { color: blue; }<br><br>
+                    
+                    /* Class selector */<br>
+                    .highlight { background: yellow; }<br><br>
+                    
+                    /* ID selector */<br>
+                    #header { font-size: 2rem; }<br><br>
+                    
+                    /* Attribute selector */<br>
+                    a[target="_blank"] { color: purple; }<br><br>
+                    
+                    /* Pseudo-class selector */<br>
+                    button:hover { background: #ddd; }
+                </div>
+                
+                <div class="interactive-demo">
+                    <button onclick="applySelector('element')">Style Paragraphs</button>
+                    <button onclick="applySelector('class')">Style Highlights</button>
+                    <button onclick="applySelector('id')">Style Header</button>
+                    <button onclick="resetStyles()">Reset Styles</button>
+                    
+                    <div class="output">
+                        <p id="header">This is a header paragraph</p>
+                        <p>This is a regular paragraph</p>
+                        <p class="highlight">This is a highlighted paragraph</p>
+                        <p>Another regular paragraph</p>
+                        <p class="highlight">Another highlighted paragraph</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Box Model</h2>
+                <p>The CSS box model describes the rectangular boxes generated for elements.</p>
+                
+                <div class="code-example">
+                    .box {<br>
+                    &nbsp;&nbsp;width: 200px;<br>
+                    &nbsp;&nbsp;height: 100px;<br>
+                    &nbsp;&nbsp;padding: 20px;<br>
+                    &nbsp;&nbsp;border: 5px solid #ffcc00;<br>
+                    &nbsp;&nbsp;margin: 10px;<br>
+                    }
+                </div>
+                
+                <div class="interactive-demo">
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="padding">Padding:</label>
+                            <input type="range" id="padding" min="0" max="50" value="20" oninput="updateBoxModel()">
+                        </div>
+                        <div class="control-group">
+                            <label for="border">Border:</label>
+                            <input type="range" id="border" min="0" max="20" value="5" oninput="updateBoxModel()">
+                        </div>
+                        <div class="control-group">
+                            <label for="margin">Margin:</label>
+                            <input type="range" id="margin" min="0" max="50" value="10" oninput="updateBoxModel()">
+                        </div>
+                    </div>
+                    
+                    <div class="output" style="display: flex; justify-content: center;">
+                        <div id="boxModelDemo" class="demo-element">Box Model</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-container">
+            <div class="card">
+                <h2>Flexbox</h2>
+                <p>Flexbox is a layout model that allows elements to align and distribute space within a container.</p>
+                
+                <div class="code-example">
+                    .container {<br>
+                    &nbsp;&nbsp;display: flex;<br>
+                    &nbsp;&nbsp;justify-content: center;<br>
+                    &nbsp;&nbsp;align-items: center;<br>
+                    &nbsp;&nbsp;flex-wrap: wrap;<br>
+                    }
+                </div>
+                
+                <div class="interactive-demo">
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="justifyContent">Justify Content:</label>
+                            <select id="justifyContent" onchange="updateFlexbox()">
+                                <option value="flex-start">Flex Start</option>
+                                <option value="center" selected>Center</option>
+                                <option value="flex-end">Flex End</option>
+                                <option value="space-between">Space Between</option>
+                                <option value="space-around">Space Around</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="alignItems">Align Items:</label>
+                            <select id="alignItems" onchange="updateFlexbox()">
+                                <option value="stretch">Stretch</option>
+                                <option value="flex-start">Flex Start</option>
+                                <option value="center" selected>Center</option>
+                                <option value="flex-end">Flex End</option>
+                                <option value="baseline">Baseline</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-container" id="flexContainer">
+                        <div class="flex-item">Item 1</div>
+                        <div class="flex-item">Item 2</div>
+                        <div class="flex-item">Item 3</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>CSS Grid</h2>
+                <p>CSS Grid is a two-dimensional layout system for the web.</p>
+                
+                <div class="code-example">
+                    .container {<br>
+                    &nbsp;&nbsp;display: grid;<br>
+                    &nbsp;&nbsp;grid-template-columns: repeat(3, 1fr);<br>
+                    &nbsp;&nbsp;gap: 10px;<br>
+                    }
+                </div>
+                
+                <div class="interactive-demo">
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="gridColumns">Grid Columns:</label>
+                            <select id="gridColumns" onchange="updateGrid()">
+                                <option value="1">1 Column</option>
+                                <option value="2">2 Columns</option>
+                                <option value="3" selected>3 Columns</option>
+                                <option value="4">4 Columns</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-container" id="gridContainer">
+                        <div class="grid-item">Item 1</div>
+                        <div class="grid-item">Item 2</div>
+                        <div class="grid-item">Item 3</div>
+                        <div class="grid-item">Item 4</div>
+                        <div class="grid-item">Item 5</div>
+                        <div class="grid-item">Item 6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-container">
+            <div class="card">
+                <h2>Transitions & Animations</h2>
+                <p>CSS allows you to create smooth transitions and animations between states.</p>
+                
+                <div class="code-example">
+                    /* Transition */<br>
+                    .element {<br>
+                    &nbsp;&nbsp;transition: all 0.3s ease;<br>
+                    }<br><br>
+                    
+                    /* Animation */<br>
+                    @keyframes example {<br>
+                    &nbsp;&nbsp;0% { transform: scale(1); }<br>
+                    &nbsp;&nbsp;50% { transform: scale(1.2); }<br>
+                    &nbsp;&nbsp;100% { transform: scale(1); }<br>
+                    }<br><br>
+                    
+                    .animated {<br>
+                    &nbsp;&nbsp;animation: example 2s infinite;<br>
+                    }
+                </div>
+                
+                <div class="interactive-demo">
+                    <button onclick="toggleTransition()">Toggle Transition</button>
+                    <button onclick="toggleAnimation()">Toggle Animation</button>
+                    
+                    <div class="output" style="display: flex; justify-content: center;">
+                        <div id="transitionDemo" class="demo-element">Hover Me</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Responsive Design</h2>
+                <p>Responsive design allows your website to adapt to different screen sizes.</p>
+                
+                <div class="code-example">
+                    /* Media queries */<br>
+                    @media (max-width: 768px) {<br>
+                    &nbsp;&nbsp;.container {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;flex-direction: column;<br>
+                    &nbsp;&nbsp;}<br>
+                    }<br><br>
+                    
+                    /* Flexible units */<br>
+                    .responsive-element {<br>
+                    &nbsp;&nbsp;width: 100%;<br>
+                    &nbsp;&nbsp;max-width: 1200px;<br>
+                    &nbsp;&nbsp;margin: 0 auto;<br>
+                    }
+                </div>
+                
+                <div class="interactive-demo">
+                    <p>Resize your browser window to see responsive design in action.</p>
+                    <div class="output">
+                        <div style="background: #ff6b6b; padding: 15px; margin: 10px 0; border-radius: 5px;">
+                            This element is 100% wide on mobile, but has a max-width on larger screens.
+                        </div>
+                        <div class="flex-container">
+                            <div class="flex-item">Flex Item 1</div>
+                            <div class="flex-item">Flex Item 2</div>
+                            <div class="flex-item">Flex Item 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Created with CSS • Refresh the page to reset all examples</p>
+        </footer>
+    </div>
+
+    <script>
+        // Selectors example
+        function applySelector(type) {
+            const output = document.querySelector('.interactive-demo .output');
+            
+            if (type === 'element') {
+                output.querySelectorAll('p').forEach(p => {
+                    p.style.color = '#4dabf7';
+                    p.style.fontWeight = 'bold';
+                });
+            } else if (type === 'class') {
+                output.querySelectorAll('.highlight').forEach(el => {
+                    el.style.background = '#ffd43b';
+                    el.style.padding = '5px';
+                });
+            } else if (type === 'id') {
+                const header = output.querySelector('#header');
+                header.style.fontSize = '2rem';
+                header.style.color = '#ff6b6b';
+            }
+        }
+        
+        function resetStyles() {
+            const output = document.querySelector('.interactive-demo .output');
+            output.querySelectorAll('*').forEach(el => {
+                el.removeAttribute('style');
+            });
+        }
+        
+        // Box Model example
+        function updateBoxModel() {
+            const padding = document.getElementById('padding').value;
+            const border = document.getElementById('border').value;
+            const margin = document.getElementById('margin').value;
+            
+            const demo = document.getElementById('boxModelDemo');
+            demo.style.padding = `${padding}px`;
+            demo.style.border = `${border}px solid #ffcc00`;
+            demo.style.margin = `${margin}px`;
+        }
+        
+        // Flexbox example
+        function updateFlexbox() {
+            const justifyContent = document.getElementById('justifyContent').value;
+            const alignItems = document.getElementById('alignItems').value;
+            
+            const container = document.getElementById('flexContainer');
+            container.style.justifyContent = justifyContent;
+            container.style.alignItems = alignItems;
+        }
+        
+        // Grid example
+        function updateGrid() {
+            const columns = document.getElementById('gridColumns').value;
+            
+            const container = document.getElementById('gridContainer');
+            container.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+        }
+        
+        // Transitions & Animations example
+        function toggleTransition() {
+            const demo = document.getElementById('transitionDemo');
+            
+            if (demo.style.transition) {
+                demo.style.transition = '';
+                demo.textContent = 'Hover Me';
+            } else {
+                demo.style.transition = 'all 0.5s ease';
+                demo.textContent = 'Now Hover Me!';
+            }
+        }
+        
+        function toggleAnimation() {
+            const demo = document.getElementById('transitionDemo');
+            
+            if (demo.style.animation) {
+             
